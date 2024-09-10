@@ -37,6 +37,22 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Listening for insert requests to Firestore
+  socket.on('insert_firestore', async (data) => {
+    try {
+      // Insert new document to Firestore
+      const docRef = await db.collection('messages').add(data);
+      
+      // Send back the document ID after successful insert
+      socket.emit('firestore_inserted', { id: docRef.id, ...data });
+      console.log('New Firestore document inserted with ID:', docRef.id);
+    } catch (error) {
+      console.error('Error inserting Firestore document:', error);
+      socket.emit('error', 'Firestore insert failed');
+    }
+  });
+
+
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });
