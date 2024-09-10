@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
       // Insert new document to Firestore
       const newData = {
         ...data,
-        timestamp: FieldValue.serverTimestamp() // Add Firestore server timestamp
+        timestamp: admin.firestore.FieldValue.serverTimestamp() // Add Firestore server timestamp
       };
 
       // Insert new document into Firestore with the added timestamp
