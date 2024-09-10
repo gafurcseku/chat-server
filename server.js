@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
       const docRef = await db.collection('Messages').add(data);
       
       // Send back the document ID after successful insert
-      socket.emit('firestore_inserted', { id: docRef.id, ...data });
+      io.emit('firestore_inserted', { id: docRef.id, ...data });
       console.log('New Firestore document inserted with ID:', docRef.id);
     } catch (error) {
       console.error('Error inserting Firestore document:', error);
