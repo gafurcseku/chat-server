@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
 
       // Insert new document into Firestore with the added timestamp
       const docRef = await db.collection('Messages').add(newData);
-      
+      socket.emit('error', 'Firestore insert failed');
       // Send back the document ID after successful insert
       io.emit('firestore_inserted', { id: docRef.id, ...newData });
       console.log('New Firestore document inserted with ID:', docRef.id);
