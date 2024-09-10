@@ -25,7 +25,7 @@ io.on('connection', (socket) => {
   // Listen for a message to update Firestore
   socket.on('update_firestore', async (data) => {
     try {
-      const docRef = db.collection('messages').doc(data.id);
+      const docRef = db.collection('Messages').doc(data.id);
       await docRef.update(data.updateFields);
 
       // Notify all clients about the update
@@ -41,7 +41,7 @@ io.on('connection', (socket) => {
   socket.on('insert_firestore', async (data) => {
     try {
       // Insert new document to Firestore
-      const docRef = await db.collection('messages').add(data);
+      const docRef = await db.collection('Messages').add(data);
       
       // Send back the document ID after successful insert
       socket.emit('firestore_inserted', { id: docRef.id, ...data });
