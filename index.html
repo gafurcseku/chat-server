@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Firebase Firestore App</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1>Socket.IO with Firebase Firestore</h1>
+  <button id="updateButton">Update Firestore</button>
+
+  <script>
+    const socket = io();
+
+    document.getElementById('updateButton').addEventListener('click', () => {
+      // Sending update request to the server
+      socket.emit('update_firestore', {
+        id: 'your-document-id',  // Document ID
+        updateFields: {          // Fields to update
+          message: 'New message content'
+        }
+      });
+    });
+
+    // Listen for Firestore updates
+    socket.on('firestore_updated', (data) => {
+      console.log('Firestore has been updated:', data);
+    });
+
+    socket.on('error', (msg) => {
+      console.error('Error:', msg);
+    });
+  </script>
+</body>
+</html>
