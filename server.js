@@ -331,6 +331,19 @@ app.get("/scrape-details", async (req, res) => {
           }
         }
 
+          // Retry once if first attempt fails
+        if (!detailData) {
+          console.warn(`⚠️ First attempt failed for ${brand.link}. Retrying...`);
+          await delay(30000); // Wait 3 seconds before retry
+          
+          detailData = await scrapeMedicineDetails(brand.link, brand._id);
+          
+          if (detailData) {
+            retryCount++;
+            console.log(`✅ Retry successful for ${brand.link}`);
+          }
+        }
+
         // Stop if both attempts fail
         if (!detailData) {
           console.error(`❌ Failed to scrape details for ${brand.link} after retry. Stopping operation.`);
