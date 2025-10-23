@@ -8,12 +8,12 @@ const Medicine = require("./models/Medicine");
 const app = express();
 
 // ============================================
-// 📌 CONFIGURATION //28e8eb5199d97ed32ad14feee1dd28b9
+// 📌 CONFIGURATION //28e8eb5199d97ed32ad14feee1dd28b9 full
 // e6c76d1c42b153056ae4c3455a266c2a
 // ============================================
 const CONFIG = {
   MONGODB_URI: process.env.MONGODB_URI || "mongodb+srv://bac:123abc45cba@cluster0.qchgzga.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
-  SCRAPER_API_KEY: process.env.SCRAPER_API_KEY || "28e8eb5199d97ed32ad14feee1dd28b9",
+  SCRAPER_API_KEY: process.env.SCRAPER_API_KEY || "e6c76d1c42b153056ae4c3455a266c2a",
   PORT: process.env.PORT || 3000,
   SCRAPE_DELAY: 2000, // 2 seconds delay between requests
   MAX_PAGES: 830,
